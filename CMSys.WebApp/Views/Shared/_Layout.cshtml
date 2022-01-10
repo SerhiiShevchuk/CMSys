@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width" />
+        <link rel="stylesheet" href="~/css/cmsys.css" />
+        <script src="https://kit.fontawesome.com/9c63756384.js" crossorigin="anonymous"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <title>Flexbox в CSS3</title>
+    </head>
+    <body>
+        <nav class="sticky">
+            <div class="label-container">
+                <div class="flex-center"><i class="far fa-smile-wink"></i></div>
+                <div>CMSYS</div>
+            </div>         
+            <ul>
+                <li><a asp-area="" asp-controller="Courses" asp-action="Courses"><i class="fas fa-bars"></i> Courses</a></li>
+                <li><a asp-controller="Trainers" asp-action="Trainers"><i class="fas fa-bars"></i> Trainers</a></li>
+                @if (Context.User.IsInRole("Admin"))
+                {
+                    <li><a asp-area="Admin" asp-controller="Courses" asp-action="Courses"><i class="fas fa-bars"></i> Courses List</a></li>
+                    <li><a asp-area="Admin" asp-controller="CourseGroups" asp-action="CourseGroups"><i class="fas fa-bars sideBarButton"></i> Courses Groups</a></li>
+                    <li><a asp-area="Admin" asp-controller="Trainers"  asp-action="Trainers"><i class="fas fa-bars"></i> Trainer List</a></li>
+                    <li><a asp-area="Admin" asp-controller="TrainerGroups" asp-action="TrainerGroups"><i class="fas fa-bars"></i> Trainer Groups</a></li>
+                    <li><a asp-area="Admin" asp-controller="Users" asp-action="Users"><i class="fas fa-user-friends"></i>Users</a></li>
+                }
+            </ul>
+        </nav>
+        <div class="page-wrap">
+            <header class="sticky">
+                <div class="profile">
+                    @Context.User.Identity.Name <i class="fas fa-user"></i>
+                </div>
+            </header>
+            <main>
+                @RenderBody()
+            </main>
+            <footer>
+                <p class="text3">Copyright @@ CMSys 2021</p>
+            </footer>
+        </div>
+    </body>
+</html>

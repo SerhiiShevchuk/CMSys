@@ -1,0 +1,27 @@
+﻿@model Course
+
+<div class="crnt-container">
+    <div class="text1">@Model.Name
+        @if (Model.IsNew){<i class="fas fa-star"></i>}
+    </div>
+</div>
+<div id="modDialog" class="fade" >
+    <div id="dialogContent" class="modal-dialog"></div>
+</div>
+<div>
+    <div class="pointer color-aqu">@Model.CourseGroup.Name</div>
+    <div class="pointer color-gray">@Model.CourseType.Name</div>
+</div>
+<div>
+    <p class="text3">@Model.Description</p>
+    <div class="trainer-wrap text3">Trainers:
+        @foreach(var trainer in Model.Trainers)
+        {
+            <a data-bs-toggle="modal" data-bs-target="@($"#t{trainer.TrainerId}")" class="text-primary">
+                @trainer.Trainer.User.FullName
+            </a>
+            <partial name="_UserInfo" model="trainer.Trainer"/>
+        }
+    </div>
+    <a class="btn btn-outline-secondary" href="@ViewData["ReturnUrl"]">Back to List</a>
+</div>

@@ -1,0 +1,34 @@
+﻿@model IEnumerable<IGrouping<TrainerGroup, Trainer>>
+
+<div class="crnt-container">
+    <div class="text1">Trainers</div>
+</div>
+
+<div id="modDialog" class="fade" >
+    <div id="dialogContent" class="modal-dialog"></div>
+</div>
+@foreach (var group in Model)
+{
+    <div class="cards-group">
+        <div class="group-header text2"><h6>@group.Key.Name</h6></div>
+        <div class="group-body">
+            @foreach (var trainer in group)
+            {
+                <div class="person-card">
+                    <div>
+                        <img style="float:left"src="data:image/png;base64,@Convert.ToBase64String(trainer.User.Photo)"/>
+                        @if(trainer.Description != null && trainer.Description != string.Empty)
+                        {
+                            <button type="button" data-bs-toggle="modal" data-bs-target="@($"#t{trainer.Id}")" class="user-details btn btn-primary btn-sm">
+                                <span>&#8520</span>
+                            </button>
+                            <partial name="_UserInfo" model="trainer" />
+                        }
+                    </div>
+                    <div class="text2">@trainer.User.FullName</div>
+                </div>
+            }
+        </div>
+    </div>
+}
+

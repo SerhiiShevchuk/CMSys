@@ -1,0 +1,125 @@
+﻿@model VisibleEntityEditModel
+
+<div class="crnt-container">
+    <div class="text1">@ViewBag.Title</div>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Create Group</button>
+
+   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text4" id="exampleModalLabel">Create Group</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-2">
+                 <label asp-for="Name" class="col-form-label text4"></label>
+                 <input asp-for="Name" class="form-control text3"/>
+                 <span asp-validation-for="Name" class="text-error"></span>
+              </div>
+              <div class="mb-2">
+                 <label asp-for="VisualOrder" class="col-form-label text4">Order</label>
+                 <input asp-for="VisualOrder" class="form-control text3"/>
+                 <span asp-validation-for="VisualOrder" class="text-error"></span>
+              </div>
+              <div class="mb-2">
+                 <label asp-for="Description" class="col-form-label text4"></label>
+                 <textarea asp-for="Description" class="form-control text3"></textarea>
+                 <span asp-validation-for="Description" class="text-error"></span>
+              </div>
+            </form> 
+          </div>
+          <div class="modal-footer">
+            <button id="createGroup" type="button" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+   </div>
+
+</div>
+<div class="main-page text3">
+    <div id="routAPI" hidden>@ViewBag.Rout</div>
+    <div class="container">
+        <div class="row title text4">
+            <div class="col-5">Name</div>
+            <div class="col-3">Description</div>
+            <div class="col">Order</div>
+            <div class="col">Action</div>
+        </div>
+        @foreach(var group in Model.Entities)
+        {
+            <div class="row row-info align-items-center fs-6" data-group-id=@group.Id>
+                <div class="col-5">@group.Name</div>
+                <div class="col-3">@group.Description</div>
+                <div class="col">@group.VisualOrder</div>
+                <div class="col">
+                    <div class="action-wrap">
+                        <div class="row">
+                            <a class="action-yellow flex-center" data-bs-toggle="modal" data-bs-target="@($"#t{group.Id}")"><i class="fas fa-pencil-alt"></i></a>
+                            <div class="modal fade" id="@($"t{group.Id}")" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title text4" id="exampleModalLabel">Create Group</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form data-group-id=@group.Id>
+                                                <div class="mb-2" hidden>
+                                                    <label asp-for="@group.Id" class="col-form-label text4">@group.Id</label>
+                                                    <input asp-for="@group.Id" class="form-control text3"/>
+                                                </div>
+                                                <div class="mb-2">
+                                                    <label asp-for="@group.Name" class="col-form-label text4"></label>
+                                                    <input asp-for="@group.Name" class="form-control text3"/>
+                                                    <span asp-validation-for="@group.Name" class="text-error"></span>
+                                                </div>
+                                                <div class="mb-2">
+                                                    <label asp-for="@group.VisualOrder" class="col-form-label text4">Order</label>
+                                                    <input asp-for="@group.VisualOrder" class="form-control text3"/>
+                                                    <span asp-validation-for="@group.VisualOrder" class="text-error"></span>
+                                                </div>
+                                                <div class="mb-2">
+                                                    <label asp-for="@group.Description" class="col-form-label text4"></label>
+                                                    <textarea asp-for="@group.Description" class="form-control text3"></textarea>
+                                                    <span asp-validation-for="@group.Description" class="text-error"></span>
+                                                </div>
+                                            </form> 
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button id="updateGroup" data-group-id="@group.Id" type="button" class="btn btn-primary">Update</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <a id="deleteGroup" class="action-red flex-center" data-group-id="@group.Id"><i class="fas fa-trash-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="modal fade" id="errorWindow" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text4" id="exampleModalLabel">Error</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-error fs-6">
+                    Group has dependent items.
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/site.js"></script>
+
+

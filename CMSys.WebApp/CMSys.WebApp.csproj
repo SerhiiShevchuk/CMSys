@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CMSys.Core\CMSys.Core.csproj" />
+    <ProjectReference Include="..\CMSys.Infrastructure\CMSys.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Home\" />
+    <Folder Include="wwwroot\lib\" />
+  </ItemGroup>
+
+</Project>

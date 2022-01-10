@@ -1,0 +1,31 @@
+﻿@model User
+
+<div class="crnt-container">
+    <div class="text1">@Model.FullName</div>
+</div>
+<div class="edit-form-wrap">
+
+    <div class="card mb-3 shadow bg-body rounded" style="max-width: 540px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="data:image/png;base64,@Convert.ToBase64String(Model.Photo)" alt="..." class="img-fluid rounded-start">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <p class="card-text">Department: @Model.Department</p>
+            <p class="card-text">Location: @Model.Location</p>
+            <p class="card-text">Position: @Model.Position</p>
+            <p class="card-text">Start Date: @Model.StartDate</p>
+            @if (@Model.EndDate != null) { <p class="card-text">Start Date: @Model.EndDate</p>} 
+            <p class="card-text">Roles: 
+                @foreach (var r in @Model.Roles)
+                {
+                    <span>@r.Name</span>
+                }
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a class="btn btn-outline-secondary mt-2 mb-2" asp-action="Users">Back to List</a>
+</div>

@@ -1,0 +1,43 @@
+﻿@model CourseEditModel
+
+<div class="crnt-container">
+    <div class="text1">Update Course</div>
+</div>
+<div class="main-page">
+    <form asp-action="Update">
+        <div class="form-group">
+            <label asp-for="Name" class="text4"></label>
+            <input asp-for="Name" class="text3"/>
+            <span asp-validation-for="Name" class="text-error"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="IsNew" class="text4"></label>
+            <div class="form-check form-switch">
+                <input asp-for="IsNew"  class="form-check-input" type="checkbox"/>
+                <span asp-validation-for="IsNew" class="text-error"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="CourseTypeName" class="text4"></label>
+            <select asp-for="CourseTypeName" asp-items="@(new SelectList(Model.CourseTypes, "Name", "Name"))" class="text3"></select>
+        </div>
+        <div class="form-group">
+            <label asp-for="CourseGroupName" class="text4"></label>
+             <select asp-for="CourseGroupName" asp-items="@(new SelectList(Model.CourseGroups, "Name", "Name"))" class="text3"></select>
+        </div>
+        <div class="form-group">
+            <label asp-for="VisualOrder" class="text4"></label>
+            <input asp-for="VisualOrder" class="text3"/>
+            <span asp-validation-for="VisualOrder" class="text-error"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description" class="text4"></label>
+            <textarea asp-for="Description" class="text3">@Model.Description</textarea>
+            <span asp-validation-for="Description" class="text-error"></span>
+        </div>
+        <input type="submit" class="btn btn-primary btn-sm" value="Update" />
+    </form>
+</div>
+<div>
+    <a class="btn btn-outline-secondary mt-2 mb-2" asp-action="Courses">Back to List</a>
+</div>

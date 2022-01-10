@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Course>
+
+<div class="crnt-container">
+    <div class="text1">Courses</div>
+</div>
+@foreach (var course in Model)
+{
+    <div class="cards-group">
+        <div class="group-header ">
+            <div class="text4">@course.Name
+                @if (course.IsNew){<i class="fas fa-star"></i>}
+            </div>
+            <div class="pointer color-aqu">@course.CourseGroup.Name</div>
+            <div class="pointer color-gray">@course.CourseType.Name</div>
+        </div>
+        <div class="group-body">
+            <p>@course.Description</p>
+            <a class="info" asp-action="Details" asp-route-id="@course.Id" asp-route-returnUrl="https://localhost:5001/Courses">More info...</a>
+        </div>
+    </div>
+}

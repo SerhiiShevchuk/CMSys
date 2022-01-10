@@ -1,0 +1,62 @@
+﻿@model UserEditModel
+
+<div class="crnt-container">
+    <div class="text1">Update for @Model.Name</div>
+</div>
+<div class="edit-form-wrap">
+    <div class="edit-form">
+        <div class="group-header text2">Change Password</div>
+        <div class="edit-form-body text3">
+             <form asp-action="Update">
+                    <div class="mb-2">
+                        <label asp-for="NewPassword" class="col-form-label text4">New Password</label>
+                        <input asp-for="NewPassword" class="form-control text3"/>
+                        <span asp-validation-for="NewPassword" class="text-error"></span>
+                    </div>
+                    <div class="mb-2">
+                        <label asp-for="RepeatPassword" class="col-form-label text4">Repeat Password</label>
+                        <input asp-for="RepeatPassword" class="form-control text3"/>
+                        <span asp-validation-for="RepeatPassword" class="text-error"></span>
+                    </div>
+                    <div asp-validation-summary="All"  class="text-error"></div>
+                    <input type="submit" class="btn btn-primary" value="Change"/>
+             </form>
+        </div>
+    </div>
+    <div class="edit-form">
+        <div class="group-header text2">User Roles</div>
+        <div class="edit-form-body text3">
+            <div class="container">
+                <div class="row title">
+                    <div class="col">Role</div>
+                    <div class="col">Action</div>
+                </div>
+            </div>
+            <div class="container mb-3">
+                @foreach (var role in Model.Roles)
+                {
+                    <div class="row edit-row">
+                        <div class="col name">@role.Name</div>
+                        <div class="col action-wrap">
+                            <a asp-action="DeleteRole" asp-route-roleId="@role.Id" class="action-red flex-center">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+            <form asp-action="AddRole">
+                <div class="input-group mb-3">
+                    <select asp-for="RoleId" asp-items="@(new SelectList(Model.AllRoles, "Id", "Name"))" class="text3 form-control">
+                    </select>
+                    <input type="submit" class="btn btn-primary" value="Add"/>
+                </div>
+             </form>
+        </div>
+    </div>
+</div>  
+<div>
+    <a asp-area="Admin" asp-controller="Users" asp-action="Users" class="btn btn-outline-secondary mt-2 mb-2">Back to List</a>
+</div>
+
+

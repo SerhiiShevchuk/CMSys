@@ -1,0 +1,31 @@
+﻿@model TrainerEditModel
+
+<div class="crnt-container">
+    <div class="text1">Create Trainer</div>
+</div>
+<div class="main-page">
+    <form asp-action="Create">
+        <div class="form-group">
+            <label asp-for="Id" class="text4">User</label>
+            <select asp-for="Id" asp-items="@(new SelectList(Model.Users, "Id", "FullName"))" class="text3"></select>
+        </div>
+        <div class="form-group">
+            <label asp-for="TrainerGroupId" class="text4">TrainerGroup</label>
+            <select asp-for="TrainerGroupId" asp-items="@(new SelectList(Model.TrainerGroups, "Id", "Name"))" class="text3"></select>
+        </div>
+        <div class="form-group">
+            <label asp-for="VisualOrder" class="text4">Order</label>
+            <input asp-for="VisualOrder" class="text3"/>
+            <span asp-validation-for="VisualOrder" class="text-error"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description" class="text4"></label>
+            <textarea asp-for="Description" class="text3"></textarea>
+            <span asp-validation-for="Description" class="text-error"></span>
+        </div>
+        <input type="submit" class="btn btn-primary btn-sm" value="Create" />
+    </form>
+</div>
+<div>
+    <a class="btn btn-outline-secondary mt-2 mb-2" asp-action="Trainers">Back to List</a>
+</div>

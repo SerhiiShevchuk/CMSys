@@ -1,0 +1,44 @@
+﻿@model TrainersEditModel
+
+<div class="crnt-container">
+    <div class="text1">Update Trainers for @ViewBag.CourseName</div>
+</div>
+<div class="edit-form-wrap">
+    <div class="edit-form">
+        <div class="group-header text2">Add Trainer</div>
+        <div class="edit-form-body text3">
+             <form asp-action="AddTrainers">
+                <div class="input-group mb-3">
+                    <select asp-for="TrainerId" asp-items="@(new SelectList(Model.Trainers, "Id", "FullName"))" class="text3 form-control">
+                    </select>
+                    <input type="submit" class="btn btn-primary" value="Add" />
+                </div>
+             </form>
+        </div>
+    </div>
+    <div class="edit-form">
+        <div class="group-header text2">Add Trainer</div>
+        <div class="edit-form-body text3">
+            <div class="space-container">
+                <div>Trainer</div><div>Order</div><div>Action</div>
+            </div>
+            @foreach (var courseTrainer in Model.CourseTrainers)
+            {
+                <div class="edit-row">
+                    <div class="name">@courseTrainer.Trainer.User.FullName</div>
+                    <form asp-action="EditVisualOrder">
+                        <input asp-for="@courseTrainer.VisualOrder" class="text3 form-control"/>
+                    </form>
+                    <div class="action-wrap">
+                        <a asp-action="DeleteTrainers" asp-route-courseId="@courseTrainer.CourseId" asp-route-trainerId="@courseTrainer.TrainerId" class="action-red flex-center">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div>
+    <a class="btn btn-outline-secondary mt-2 mb-2" asp-action="Courses">Back to List</a>
+</div>
+</div>  

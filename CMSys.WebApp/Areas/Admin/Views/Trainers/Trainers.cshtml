@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Trainer>
+
+<div class="crnt-container">
+    <div class="text1">Trainers List</div>
+    <a asp-area="admin" asp-controller="Trainers" asp-action="Create" class="btn btn-primary btn-sm"><i class="far fa-plus-square"></i> Create Trainer</a>
+</div>
+<div class="main-page text3">
+    <div class="container">
+        <div class="row title text4">
+            <div class="col-5">Name</div>
+            <div class="col-3">Group</div>
+            <div class="col">Order</div>
+            <div class="col">Action</div>
+        </div>
+        @foreach(var trainer in Model)
+        {
+            <div class="row row-info align-items-center fs-6">
+                <div class="col-5">
+                    <div class="row align-items-center">
+                        <div class="col-2"><img  class="coll-3 img-fluid" src="data:image/png;base64,@Convert.ToBase64String(trainer.User.Photo)"/></div>
+                        <div class="col-5"> <div class="coll align-middle text-primary">@trainer.User.FullName</div></div>
+                    </div>
+                </div>
+                <div class="col-3">@trainer.TrainerGroup.Name</div>
+                <div class="col">@trainer.VisualOrder</div>
+                <div class="col" >
+                    <div class="action-wrap">
+                        <div class="row">
+                            <a asp-action="Update" asp-route-id="@trainer.Id" class="action-yellow flex-center"><i class="fas fa-pencil-alt"></i></a>
+                            <a asp-action="Delete" asp-route-id="@trainer.Id" class="action-red flex-center"><i class="fas fa-trash-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

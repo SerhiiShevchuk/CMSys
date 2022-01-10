@@ -1,0 +1,40 @@
+﻿@model IEnumerable<User>
+
+<div class="crnt-container">
+    <div class="text1">Trainers List</div>
+</div>
+<div class="main-page text3">
+    <div class="container">
+        <div class="row title text4">
+            <div class="col-3">Name</div>
+            <div class="col-2">Department</div>
+            <div class="col">Position</div>
+            <div class="col-3">Office</div>
+            <div class="col">Active?</div>
+            <div class="col">Action</div>
+        </div>
+        @foreach(var user in Model)
+        {
+            <div class="row row-info align-items-center fs-6">
+                <div class="col-3">
+                    <div class="row align-items-center">
+                        <div class="col-3"><img  class="coll-3 img-fluid" src="data:image/png;base64,@Convert.ToBase64String(user.Photo)"/></div>
+                        <div class="col"> <div class="coll align-middle text-primary">@user.FullName</div></div>
+                    </div>
+                </div>
+                <div class="col-2">@user.Department</div>
+                <div class="col">@user.Position</div>
+                <div class="col-3">@user.Location </div>
+                <div class="col">@(user.EndDate==null?"Yes":"No")</div>
+                <div class="col" >
+                    <div class="action-wrap">
+                        <div class="row">
+                            <a asp-area="Admin" asp-controller="Users" asp-route-id="@user.Id" asp-action="Details"  class="action-blue flex-center">&#8520</a>
+                            <a asp-area="Admin" asp-controller="Users" asp-action="Update" asp-route-id="@user.Id" class="action-yellow flex-center"><i class="fas fa-pencil-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
